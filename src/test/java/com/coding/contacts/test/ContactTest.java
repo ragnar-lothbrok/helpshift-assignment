@@ -10,6 +10,7 @@ import com.coding.model.Contact;
 
 /**
  * Various Test cases handled
+ * 
  * @author raghunandangupta
  *
  */
@@ -75,7 +76,37 @@ public class ContactTest {
 	@Test
 	public void search4() {
 		String searchText = "ris";
-		System.out.println("inside search2==== Search Text : " + searchText);
+		System.out.println("inside search4==== Search Text : " + searchText);
+		List<Contact> searchedContactList = ContactServiceImpl.getInstance().serachContact(searchText);
+		if (searchedContactList.size() == 0) {
+			System.out.println("No Matches Found");
+		} else {
+			for (Contact modifiedContact : searchedContactList) {
+				System.out
+						.println(modifiedContact.getFirstName() + " " + (modifiedContact.getLastName() == null ? "" : modifiedContact.getLastName()));
+			}
+		}
+	}
+
+	@Test
+	public void search5() {
+		String searchText = "c";
+		System.out.println("inside search5==== Search Text : " + searchText);
+		List<Contact> searchedContactList = ContactServiceImpl.getInstance().serachContact(searchText);
+		if (searchedContactList.size() == 0) {
+			System.out.println("No Matches Found");
+		} else {
+			for (Contact modifiedContact : searchedContactList) {
+				System.out
+						.println(modifiedContact.getFirstName() + " " + (modifiedContact.getLastName() == null ? "" : modifiedContact.getLastName()));
+			}
+		}
+	}
+	
+	@Test
+	public void search6() {
+		String searchText = "m";
+		System.out.println("inside search5==== Search Text : " + searchText);
 		List<Contact> searchedContactList = ContactServiceImpl.getInstance().serachContact(searchText);
 		if (searchedContactList.size() == 0) {
 			System.out.println("No Matches Found");
