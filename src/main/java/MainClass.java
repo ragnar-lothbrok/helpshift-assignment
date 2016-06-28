@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 import com.coding.contacts.api.ContactService;
 import com.coding.contacts.api.impl.ContactServiceImpl;
@@ -6,26 +7,37 @@ import com.coding.contacts.api.impl.ContactServiceImpl;
 public class MainClass {
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		int choice = 0;
+		String firstName = null, searchText = null;
 		ContactService contactService = ContactServiceImpl.getInstance();
 		System.out.println("*********Welcome to Contact Archives**********");
 		do {
-			try{
+			try {
 				System.out.println("Please enter your choice.");
 				System.out.println("1) Add contact 2) Search 3) Exit");
-				choice = scanner.nextInt();
-				switch(choice){
+				choice = Integer.parseInt(bufferedReader.readLine());
+				switch (choice) {
 				case 1:
+					System.out.println("Please enter firstName lastName : ");
+					firstName = bufferedReader.readLine();
+					String split[] = firstName.split(" ");
+					if (split.length ==  1) {
+						contactService.addContact(split[0], null);
+					} else {
+						contactService.addContact(split[0], split[1]);
+					}
 					break;
 				case 2:
+					System.out.println("Please enter search keyword : ");
+					searchText = bufferedReader.readLine();
+					System.out.println(contactService.serachContact(searchText));
 					break;
 				}
-			}catch(Exception exception){
-				
+			} catch (Exception exception) {
+				System.out.println("Exception occured : "+exception.getMessage());
 			}
 		} while (choice != 3);
-
 		System.out.println("*********Thank you for using Contact Archives**********");
 	}
 

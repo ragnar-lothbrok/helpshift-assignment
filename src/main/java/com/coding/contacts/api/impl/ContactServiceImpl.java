@@ -6,7 +6,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import com.coding.contacts.api.ContactService;
 import com.coding.contacts.constants.Constants;
 import com.coding.contacts.exceptions.ContactException;
+import com.coding.contacts.utils.ContactUtil;
 import com.coding.model.Contact;
+import com.coding.model.ModifiedContact;
 
 public class ContactServiceImpl implements ContactService {
 
@@ -47,23 +49,25 @@ public class ContactServiceImpl implements ContactService {
 		firstName = (firstName != null && firstName.trim().length() == 0) ? null : firstName;
 		lastName = (lastName != null && lastName.trim().length() == 0) ? null : lastName;
 		if ((firstName == null && lastName == null) || (firstName.trim().length() == 0 && lastName.trim().length() == 0)) {
-			exception = new ContactException(Constants.DUPLICATE_CONTACT);
+			exception = new ContactException(Constants.INVALID_CONTACT);
 		}
 		if (exception == null) {
-			Contact contact = new Contact(firstName, lastName);
+			ModifiedContact contact = new ModifiedContact(firstName, lastName);
 			if (!contactList.contains(contact)) {
 				contactList.add(contact);
+				ContactUtil.insertIntoTrie(firstName, contact);
+				ContactUtil.insertIntoTrie(lastName, contact);
 				return;
 			}
-			exception = new ContactException(Constants.INVALID_CONTACT);
+			exception = new ContactException(Constants.DUPLICATE_CONTACT);
 		}
 		if (exception != null) {
 			throw exception;
 		}
 	}
 
-	public List<Contact> serachContact(String searchText) {
-		return null;
+	public List<ModifiedContact> serachContact(String searchText) {
+		return ContactUtil.searchIntoTrie(searchText);
 	}
 
 }
