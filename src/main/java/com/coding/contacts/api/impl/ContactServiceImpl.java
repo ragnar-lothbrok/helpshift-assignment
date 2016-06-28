@@ -77,6 +77,8 @@ public class ContactServiceImpl implements ContactService {
 			public int compare(Contact o1, Contact o2) {
 				String firstCompleteName = o1.getFirstName() + (o1.getLastName() == null ? "" : " " + o1.getLastName());
 				String secondCompleteName = o2.getFirstName() + (o2.getLastName() == null ? "" : " " + o2.getLastName());
+				firstCompleteName = firstCompleteName.toLowerCase();
+				secondCompleteName = secondCompleteName.toLowerCase();
 				Integer num1 = firstCompleteName.indexOf(searchText);
 				Integer num2 = secondCompleteName.indexOf(searchText);
 				if (num1 == num2) {

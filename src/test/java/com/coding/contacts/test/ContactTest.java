@@ -22,7 +22,7 @@ public class ContactTest {
 			ContactServiceImpl.getInstance().addContact("Ben", "morrision");
 			ContactServiceImpl.getInstance().addContact("morris", "chris");
 			ContactServiceImpl.getInstance().addContact("Chris", "");
-			ContactServiceImpl.getInstance().addContact("Chris", "homes");
+			ContactServiceImpl.getInstance().addContact("Chris", "Ben");
 		} catch (ContactException e) {
 			e.printStackTrace();
 		}
