@@ -67,13 +67,21 @@ public class ContactServiceImpl implements ContactService {
 		}
 	}
 
-	public List<ModifiedContact> serachContact(String searchText) {
-		List<ModifiedContact> contactList =  ContactUtil.searchIntoTrie(searchText);
+	public List<ModifiedContact> serachContact(final String searchText) {
+		List<ModifiedContact> contactList = ContactUtil.searchIntoTrie(searchText);
 		contactList.sort(new Comparator<ModifiedContact>() {
 			public int compare(ModifiedContact o1, ModifiedContact o2) {
-				String firstCompleteName = o1.getFirstName() +(o1.getLastName() == null ? "" :" "+o1.getLastName());
-				String secondCompleteName = o2.getFirstName() +(o2.getLastName() == null ? "" :" "+o2.getLastName());
-				return firstCompleteName.compareTo(secondCompleteName);
+				String firstCompleteName = o1.getFirstName() + (o1.getLastName() == null ? "" : " " + o1.getLastName());
+				String secondCompleteName = o2.getFirstName() + (o2.getLastName() == null ? "" : " " + o2.getLastName());
+				Integer num1 = firstCompleteName.indexOf(searchText);
+				Integer num2 = secondCompleteName.indexOf(searchText);
+				if (num1 == num2) {
+					if (firstCompleteName.length() > secondCompleteName.length())
+						return 1;
+					else
+						return -1;
+				}
+				return (num1.compareTo(num2));
 			}
 		});
 		return contactList;
