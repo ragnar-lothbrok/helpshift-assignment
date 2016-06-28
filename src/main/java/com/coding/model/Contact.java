@@ -58,7 +58,7 @@ public class Contact implements Serializable {
 
 	@Override
 	public String toString() {
-		return "" + firstName + " " + lastName + "";
+		return "" + firstName + " " + (lastName == null ? "" : lastName) + "";
 	}
 
 	public Contact() {

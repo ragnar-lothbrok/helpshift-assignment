@@ -22,7 +22,7 @@ public class MainClass {
 					System.out.println("Please enter firstName lastName : ");
 					firstName = bufferedReader.readLine();
 					String split[] = firstName.split(" ");
-					if (split.length ==  1) {
+					if (split.length == 1) {
 						contactService.addContact(split[0], null);
 					} else {
 						contactService.addContact(split[0], split[1]);
@@ -35,10 +35,10 @@ public class MainClass {
 					break;
 				}
 			} catch (Exception exception) {
-				System.out.println("Exception occured : "+exception.getMessage());
+				System.out.println("Exception occured : " + exception.getMessage());
 			}
 		} while (choice != 3);
-		System.out.println("*********Thank you for using Contact Archives**********");
+		System.out.println("*********Happy Searching**********");
 	}
 
 }

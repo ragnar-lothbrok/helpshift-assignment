@@ -1,5 +1,6 @@
 package com.coding.contacts.api.impl;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -67,7 +68,15 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	public List<ModifiedContact> serachContact(String searchText) {
-		return ContactUtil.searchIntoTrie(searchText);
+		List<ModifiedContact> contactList =  ContactUtil.searchIntoTrie(searchText);
+		contactList.sort(new Comparator<ModifiedContact>() {
+			public int compare(ModifiedContact o1, ModifiedContact o2) {
+				String firstCompleteName = o1.getFirstName() +(o1.getLastName() == null ? "" :" "+o1.getLastName());
+				String secondCompleteName = o2.getFirstName() +(o2.getLastName() == null ? "" :" "+o2.getLastName());
+				return firstCompleteName.compareTo(secondCompleteName);
+			}
+		});
+		return contactList;
 	}
 
 }
