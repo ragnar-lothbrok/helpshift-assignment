@@ -7,11 +7,11 @@ import java.util.List;
 public class TrieNode {
 
 	private HashMap<Character, TrieNode> children;
-	private List<ModifiedContact> contactList;
+	private List<Contact> contactList;
 
 	public TrieNode() {
 		children = new HashMap<Character, TrieNode>();
-		contactList = new ArrayList<ModifiedContact>();
+		contactList = new ArrayList<Contact>();
 	}
 
 	public HashMap<Character, TrieNode> getChildren() {
@@ -22,11 +22,11 @@ public class TrieNode {
 		this.children = children;
 	}
 
-	public List<ModifiedContact> getContactList() {
+	public List<Contact> getContactList() {
 		return contactList;
 	}
 
-	public void setContactList(List<ModifiedContact> contactList) {
+	public void setContactList(List<Contact> contactList) {
 		this.contactList = contactList;
 	}
 

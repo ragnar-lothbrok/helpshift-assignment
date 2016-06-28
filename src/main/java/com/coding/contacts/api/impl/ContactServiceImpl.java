@@ -9,7 +9,6 @@ import com.coding.contacts.constants.Constants;
 import com.coding.contacts.exceptions.ContactException;
 import com.coding.contacts.utils.ContactUtil;
 import com.coding.model.Contact;
-import com.coding.model.ModifiedContact;
 
 public class ContactServiceImpl implements ContactService {
 
@@ -53,7 +52,7 @@ public class ContactServiceImpl implements ContactService {
 			exception = new ContactException(Constants.INVALID_CONTACT);
 		}
 		if (exception == null) {
-			ModifiedContact contact = new ModifiedContact(firstName, lastName);
+			Contact contact = new Contact(firstName, lastName);
 			if (!contactList.contains(contact)) {
 				contactList.add(contact);
 				ContactUtil.insertIntoTrie(firstName, contact);
@@ -67,10 +66,15 @@ public class ContactServiceImpl implements ContactService {
 		}
 	}
 
-	public List<ModifiedContact> serachContact(final String searchText) {
-		List<ModifiedContact> contactList = ContactUtil.searchIntoTrie(searchText);
-		contactList.sort(new Comparator<ModifiedContact>() {
-			public int compare(ModifiedContact o1, ModifiedContact o2) {
+	public List<Contact> serachContact(final String searchText) {
+		List<Contact> contactList = ContactUtil.searchIntoTrie(searchText);
+		
+		/**
+		 * Here we are comparing relative distance from the search text.
+		 * if equals we are returning small length contact first.
+		 */
+		contactList.sort(new Comparator<Contact>() {
+			public int compare(Contact o1, Contact o2) {
 				String firstCompleteName = o1.getFirstName() + (o1.getLastName() == null ? "" : " " + o1.getLastName());
 				String secondCompleteName = o2.getFirstName() + (o2.getLastName() == null ? "" : " " + o2.getLastName());
 				Integer num1 = firstCompleteName.indexOf(searchText);

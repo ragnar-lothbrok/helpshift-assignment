@@ -1,9 +1,17 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import com.coding.contacts.api.ContactService;
 import com.coding.contacts.api.impl.ContactServiceImpl;
+import com.coding.model.Contact;
 
+/**
+ * This is main class of the program
+ * 
+ * @author raghunandangupta
+ *
+ */
 public class MainClass {
 
 	public static void main(String[] args) {
@@ -31,7 +39,15 @@ public class MainClass {
 				case 2:
 					System.out.println("Please enter search keyword : ");
 					searchText = bufferedReader.readLine();
-					System.out.println(contactService.serachContact(searchText));
+					List<Contact> contactDataList = contactService.serachContact(searchText);
+					if (contactDataList.size() == 0) {
+						System.out.println("No Matches Found");
+					} else {
+						for (Contact modifiedContact : contactDataList) {
+							System.out.println(modifiedContact.getFirstName() + " "
+									+ (modifiedContact.getLastName() == null ? "" : modifiedContact.getLastName()));
+						}
+					}
 					break;
 				}
 			} catch (Exception exception) {

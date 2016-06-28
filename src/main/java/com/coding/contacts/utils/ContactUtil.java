@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.coding.contacts.api.impl.TrieContactImpl;
-import com.coding.model.ModifiedContact;
+import com.coding.model.Contact;
 
 public class ContactUtil {
 
-	public static void insertIntoTrie(String inputString, ModifiedContact modifiedContact) {
+	public static void insertIntoTrie(String inputString, Contact contact) {
 		if (inputString != null && inputString.length() > 0)
-			createPrefix(inputString, modifiedContact, false, new ArrayList<String>());
+			createPrefix(inputString, contact, false, new ArrayList<String>());
 
 	}
 
-	public static List<ModifiedContact> searchIntoTrie(String searchText) {
+	public static List<Contact> searchIntoTrie(String searchText) {
 		return TrieContactImpl.getInstance().search(searchText);
 	}
 
-	private static void createPrefix(String inputString, ModifiedContact modifiedContact, boolean isPrefix, List<String> existingStrings) {
+	private static void createPrefix(String inputString, Contact contact, boolean isPrefix, List<String> existingStrings) {
 		for (int i = inputString.length(); i > 0; i--) {
 			String subString = inputString.substring(0, i);
 			if (isPrefix) {
@@ -28,19 +28,19 @@ public class ContactUtil {
 			}
 			if (subString.trim().length() > 0) {
 				if (!existingStrings.contains(subString)) {
-					TrieContactImpl.getInstance().add(subString, modifiedContact);
+					TrieContactImpl.getInstance().add(subString, contact);
 					existingStrings.add(subString);
 				}
 				if (isPrefix) {
-					createSufix(subString, modifiedContact, true, existingStrings);
+					createSufix(subString, contact, true, existingStrings);
 				} else {
-					createSufix(subString, modifiedContact, true, existingStrings);
+					createSufix(subString, contact, true, existingStrings);
 				}
 			}
 		}
 	}
 
-	private static void createSufix(String inputString, ModifiedContact modifiedContact, boolean isPrefix, List<String> existingStrings) {
+	private static void createSufix(String inputString, Contact contact, boolean isPrefix, List<String> existingStrings) {
 		for (int i = 0; i < inputString.length() - 1; i++) {
 			String subString = null;
 			if (isPrefix) {
@@ -50,10 +50,10 @@ public class ContactUtil {
 			}
 			if (subString.trim().length() > 0) {
 				if (!existingStrings.contains(subString)) {
-					TrieContactImpl.getInstance().add(subString, modifiedContact);
+					TrieContactImpl.getInstance().add(subString, contact);
 					existingStrings.add(subString);
 				}
-				createPrefix(subString, modifiedContact, true, existingStrings);
+				createPrefix(subString, contact, true, existingStrings);
 			}
 		}
 	}

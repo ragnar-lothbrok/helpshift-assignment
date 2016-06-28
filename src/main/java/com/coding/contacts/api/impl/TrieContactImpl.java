@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.coding.contacts.api.TrieContactApi;
-import com.coding.model.ModifiedContact;
+import com.coding.model.Contact;
 import com.coding.model.TrieNode;
 
 public class TrieContactImpl implements TrieContactApi {
@@ -24,7 +24,7 @@ public class TrieContactImpl implements TrieContactApi {
 		return SingletonFactory.INSTANCE;
 	}
 
-	public void add(String preSufix, ModifiedContact modifiedContact) {
+	public void add(String preSufix, Contact contact) {
 		TrieNode tempTrieNode = trieNode;
 		if (preSufix != null && preSufix.trim().length() > 0) {
 			preSufix = preSufix.toLowerCase();
@@ -36,8 +36,8 @@ public class TrieContactImpl implements TrieContactApi {
 				} else {
 					tempTrieNode = tempTrieNode.getChildren().get(preSufix.charAt(i));
 				}
-				if (i == preSufix.length() - 1 && !tempTrieNode.getContactList().contains(modifiedContact)) {
-					tempTrieNode.getContactList().add(modifiedContact);
+				if (i == preSufix.length() - 1 && !tempTrieNode.getContactList().contains(contact)) {
+					tempTrieNode.getContactList().add(contact);
 				}
 
 			}
@@ -47,7 +47,7 @@ public class TrieContactImpl implements TrieContactApi {
 	/**
 	 * This will convert search text to lower case and search in Trie
 	 */
-	public List<ModifiedContact> search(String searchText) {
+	public List<Contact> search(String searchText) {
 		TrieNode tempTrieNode = trieNode;
 		if (tempTrieNode == null || searchText == null || searchText.trim().length() == 0) {
 			return Collections.emptyList();
@@ -61,7 +61,7 @@ public class TrieContactImpl implements TrieContactApi {
 				break;
 			}
 		}
-		return (tempTrieNode != null ? tempTrieNode.getContactList() : new ArrayList<ModifiedContact>(0));
+		return (tempTrieNode != null ? tempTrieNode.getContactList() : new ArrayList<Contact>(0));
 	}
 
 }
