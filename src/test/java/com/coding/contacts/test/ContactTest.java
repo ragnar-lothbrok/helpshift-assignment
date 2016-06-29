@@ -1,5 +1,7 @@
 package com.coding.contacts.test;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -33,14 +35,7 @@ public class ContactTest {
 		String searchText = "chris";
 		System.out.println("inside search1==== Search Text : " + searchText);
 		List<Contact> searchedContactList = ContactServiceImpl.getInstance().serachContact("chris");
-		if (searchedContactList.size() == 0) {
-			System.out.println("No Matches Found");
-		} else {
-			for (Contact modifiedContact : searchedContactList) {
-				System.out
-						.println(modifiedContact.getFirstName() + " " + (modifiedContact.getLastName() == null ? "" : modifiedContact.getLastName()));
-			}
-		}
+		assertEquals("Chris", searchedContactList.get(0).getFirstName());
 	}
 
 	@Test
@@ -48,14 +43,7 @@ public class ContactTest {
 		String searchText = "morris";
 		System.out.println("inside search3==== Search Text : " + searchText);
 		List<Contact> searchedContactList = ContactServiceImpl.getInstance().serachContact(searchText);
-		if (searchedContactList.size() == 0) {
-			System.out.println("No Matches Found");
-		} else {
-			for (Contact modifiedContact : searchedContactList) {
-				System.out
-						.println(modifiedContact.getFirstName() + " " + (modifiedContact.getLastName() == null ? "" : modifiedContact.getLastName()));
-			}
-		}
+		assertEquals("morris", searchedContactList.get(0).getFirstName());
 	}
 
 	@Test
@@ -63,14 +51,7 @@ public class ContactTest {
 		String searchText = "chriss";
 		System.out.println("inside search2==== Search Text : " + searchText);
 		List<Contact> searchedContactList = ContactServiceImpl.getInstance().serachContact(searchText);
-		if (searchedContactList.size() == 0) {
-			System.out.println("No Matches Found");
-		} else {
-			for (Contact modifiedContact : searchedContactList) {
-				System.out
-						.println(modifiedContact.getFirstName() + " " + (modifiedContact.getLastName() == null ? "" : modifiedContact.getLastName()));
-			}
-		}
+		assertEquals(0, searchedContactList.size());
 	}
 
 	@Test
@@ -78,14 +59,7 @@ public class ContactTest {
 		String searchText = "ris";
 		System.out.println("inside search4==== Search Text : " + searchText);
 		List<Contact> searchedContactList = ContactServiceImpl.getInstance().serachContact(searchText);
-		if (searchedContactList.size() == 0) {
-			System.out.println("No Matches Found");
-		} else {
-			for (Contact modifiedContact : searchedContactList) {
-				System.out
-						.println(modifiedContact.getFirstName() + " " + (modifiedContact.getLastName() == null ? "" : modifiedContact.getLastName()));
-			}
-		}
+		assertEquals("Chris", searchedContactList.get(0).getFirstName());
 	}
 
 	@Test
@@ -93,28 +67,14 @@ public class ContactTest {
 		String searchText = "c";
 		System.out.println("inside search5==== Search Text : " + searchText);
 		List<Contact> searchedContactList = ContactServiceImpl.getInstance().serachContact(searchText);
-		if (searchedContactList.size() == 0) {
-			System.out.println("No Matches Found");
-		} else {
-			for (Contact modifiedContact : searchedContactList) {
-				System.out
-						.println(modifiedContact.getFirstName() + " " + (modifiedContact.getLastName() == null ? "" : modifiedContact.getLastName()));
-			}
-		}
+		assertEquals("Chris", searchedContactList.get(0).getFirstName());
 	}
-	
+
 	@Test
 	public void search6() {
 		String searchText = "m";
 		System.out.println("inside search5==== Search Text : " + searchText);
 		List<Contact> searchedContactList = ContactServiceImpl.getInstance().serachContact(searchText);
-		if (searchedContactList.size() == 0) {
-			System.out.println("No Matches Found");
-		} else {
-			for (Contact modifiedContact : searchedContactList) {
-				System.out
-						.println(modifiedContact.getFirstName() + " " + (modifiedContact.getLastName() == null ? "" : modifiedContact.getLastName()));
-			}
-		}
+		assertEquals("morris", searchedContactList.get(0).getFirstName());
 	}
 }
